@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option java_package = "com.marcospaulo.app.grpc.negCore";
+
+
+
+service NegociacaoService {
+    rpc GetAll (NegociacaoSearch) returns (NegociacaoPaginado);
+    rpc Get (IdentificadorNegociacao) returns (Negociacao);
+    rpc Post (InputNegociacao) returns (IdentificadorNegociacao);
+    rpc Put (Negociacao) returns (Negociacao);
+    rpc Delete (IdentificadorNegociacao) returns (google.protobuf.Empty);
+}
+message IdentificadorNegociacao {
+    string id = 1;
+}
+
+message IdentificadorCliente {
+    string id = 1;
+}
+
+message IdentificadorEndereco {
+    string id = 1;
+}
+
+enum Produto {
+    DESCONHECIDO = 0;
+    VENDA = 1;
+    COMPRA = 2;
+}
+message InputNegociacao {
+    Produto produto = 1;
+    IdentificadorCliente cliente = 2;
+    IdentificadorEndereco endereco = 3;
+}
+
+message NegociacaoSearch {
+    int32 page = 1;
+    int32 perPage = 2;
+}
+
+message NegociacaoPaginado {
+    repeated Negociacao negociacao = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 perPage = 4;
+}
+
+
+message Negociacao {
+    string id = 1;
+    Produto produto = 2;
+    IdentificadorCliente cliente = 3;
+    IdentificadorEndereco endereco = 4;
+    string dataAtualizacao = 5;
+    string usuarioAtualizacao = 6;
+}
