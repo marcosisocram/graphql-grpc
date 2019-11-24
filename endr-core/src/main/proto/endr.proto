@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option java_package = "com.marcospaulo.app.grpc.endrCore";
+
+service EnderecoService {
+    rpc GetAll (EnderecoSearch) returns (EnderecoPaginado);
+    rpc Get (IdentificadorEndereco) returns (Endereco);
+    rpc Post (InputEndereco) returns (IdentificadorEndereco);
+    rpc Put (Endereco) returns (Endereco);
+    rpc Delete (IdentificadorEndereco) returns (google.protobuf.Empty);
+}
+
+
+message IdentificadorEndereco {
+    string id = 1;
+}
+
+message InputEndereco {
+    string cep = 1;
+    string rua = 2;
+    string complemento = 3;
+    string numero = 4;
+}
+
+message EnderecoSearch {
+    int32 page = 1;
+    int32 perPage = 2;
+}
+
+message EnderecoPaginado {
+    repeated Endereco Endereco = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 perPage = 4;
+}
+
+
+message Endereco {
+    string id = 1;
+    string cep = 2;
+    string rua = 3;
+    string complemento = 4;
+    string numero = 5;
+    string dataAtualizacao = 6;
+    string usuarioAtualizacao = 7;
+}
