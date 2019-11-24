@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option java_package = "com.marcospaulo.app.grpc.cliCore";
+
+service ClienteService {
+    rpc GetAll (ClienteSearch) returns (ClientePaginado);
+    rpc Get (IdentificadorCliente) returns (Cliente);
+    rpc Post (InputCliente) returns (IdentificadorCliente);
+    rpc Put (Cliente) returns (Cliente);
+    rpc Delete (IdentificadorCliente) returns (google.protobuf.Empty);
+}
+
+message IdentificadorEndereco {
+    string id = 1;
+}
+message IdentificadorCliente {
+    string id = 1;
+}
+
+message InputCliente {
+    string nome = 1;
+    string documento = 2;
+    IdentificadorEndereco endereco = 3;
+}
+
+message ClienteSearch {
+    int32 page = 1;
+    int32 perPage = 2;
+}
+
+message ClientePaginado {
+    repeated Cliente cliente = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 perPage = 4;
+}
+
+
+message Cliente {
+    string id = 1;
+    string nome = 2;
+    string documento = 3;
+    IdentificadorEndereco endereco = 4;
+    string dataAtualizacao = 6;
+    string usuarioAtualizacao = 7;
+}
+
+
