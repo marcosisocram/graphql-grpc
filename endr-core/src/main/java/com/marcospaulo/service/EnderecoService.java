@@ -62,11 +62,11 @@ public final class EnderecoService {
             final String id = UUID.randomUUID().toString();
 
 
-            final EnderecoDTO negociacaoDTO = new EnderecoDTO(id,
+            final EnderecoDTO enderecoDTO = new EnderecoDTO(id,
                     request.getCep(), request.getRua(), request.getComplemento(), request.getNumero(),
                     getDataHoje(), UUID.randomUUID().toString());
 
-            map.put(id, negociacaoDTO);
+            map.put(id, enderecoDTO);
 
             responseObserver.onNext(Endr.IdentificadorEndereco.newBuilder().setId(id).build());
 

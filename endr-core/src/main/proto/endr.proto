@@ -30,7 +30,7 @@ message EnderecoSearch {
 }
 
 message EnderecoPaginado {
-    repeated Endereco Endereco = 1;
+    repeated Endereco endereco = 1;
     int32 total = 2;
     int32 page = 3;
     int32 perPage = 4;
